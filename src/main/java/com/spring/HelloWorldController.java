@@ -1,5 +1,6 @@
 package com.spring;
 
+import com.spring.model.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

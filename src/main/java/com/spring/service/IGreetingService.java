@@ -1,7 +1,7 @@
 package com.spring.service;
 
-import com.spring.Greeting;
-import com.spring.User;
+import com.spring.model.Greeting;
+import com.spring.model.User;
 
 import java.util.List;
 

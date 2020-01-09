@@ -1,22 +1,18 @@
-package com.spring;
-
-import org.springframework.stereotype.Component;
+package com.spring.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.concurrent.atomic.AtomicLong;
 
-@Component
 @Entity
 public class User {
-    private String firstName="";
-    private String lastName="";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String firstName;
+    private String lastName;
 
     public User(String firstName, String lastName) {
         this.firstName = firstName;
@@ -41,11 +37,9 @@ public class User {
         return lastName;
     }
 
-    public void setId(Long id) {
+    public void setId(Long id) { this.id = id; }
 
-        this.id = id;
-    }
-
+    public Long getId() {return id; }
 
     @Override
     public String toString() {

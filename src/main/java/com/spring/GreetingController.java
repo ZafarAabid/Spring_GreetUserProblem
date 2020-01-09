@@ -1,5 +1,7 @@
 package com.spring;
 
+import com.spring.model.Greeting;
+import com.spring.model.User;
 import com.spring.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +18,10 @@ public class GreetingController {
 
     @Autowired
     private IGreetingService greetingService;
-    @Autowired
-    private User user;
 
     @GetMapping("/addByParameter")
     public Greeting addGreeting(@RequestParam(value = "firstName", defaultValue = "") String firstName, @RequestParam(value = "lastName", defaultValue = "") String lastName) {
+        User user = new User();
         user.setFirstName(firstName);
         user.setLastName(lastName);
         return greetingService.addGreeting(user);

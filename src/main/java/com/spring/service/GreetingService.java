@@ -1,28 +1,31 @@
 package com.spring.service;
 
-import com.spring.Greeting;
-import com.spring.User;
+import com.spring.model.Greeting;
+import com.spring.model.User;
 import com.spring.repository.GreetingRepository;
+import com.spring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class GreetingService implements IGreetingService {
-    private  static final  String template =  "Hello, %s !";
-//    private  final AtomicLong counter = new AtomicLong();
+    private static final String template = "Hello, %s !";
 
-    public GreetingService() { }
+    public GreetingService() {
+    }
 
     @Autowired
     private GreetingRepository greetingRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public Greeting addGreeting(User user) {
         String message = String.format(template, (user.toString().isEmpty()) ? "Hello World" : user.toString());
-        return greetingRepository.save(new Greeting(message) ) ;
+        userRepository.save(user);
+        return greetingRepository.save(new Greeting(message, user.getId()));
     }
 
     @Override
@@ -37,8 +40,8 @@ public class GreetingService implements IGreetingService {
 
     @Override
     public void UpdateById(long id, String firstName, String lastName) {
-        Greeting greeting =greetingRepository.findById(id).get();
-        greeting.setName(firstName+lastName);
+        Greeting greeting = greetingRepository.findById(id).get();
+        greeting.setName(firstName + lastName);
         greetingRepository.save(greeting);
     }
 
